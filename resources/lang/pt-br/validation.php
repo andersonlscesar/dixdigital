@@ -5,12 +5,14 @@ return [
             'required' => 'O campo "Nome" é obrigatório'
         ],
         'email' => [
-            'required' => 'O campo "E-mail" é obrigatório'
+            'required' => 'O campo "E-mail" é obrigatório',
+            'unique'    => 'Este e-mail já está em uso'
         ],
         'password' => [
             'required' => 'O campo "Senha" é obrigatório',
             'confirmed' => 'As senhas estão diferentes.',
-            'min' => 'A senha deve possuir no mínimo :min caracteres.'
+            'min' => 'A senha deve possuir no mínimo :min caracteres.',
+            'different' => 'A nova senha não pode ser igual a senha atual.'
         ],
         'agree_terms_and_conditions' => [
             'required' => 'Por favor, aceite os termos e condições do site'

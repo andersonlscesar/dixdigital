@@ -11,6 +11,18 @@
                     <p>{{ _('Dashboard') }}</p>
                 </a>
             </li>
+{{--            <li @if ($pageSlug == 'dashboard') class="active " @endif>--}}
+{{--                <a href="{{ route('home') }}">--}}
+{{--                    <i class="tim-icons icon-paper"></i>--}}
+{{--                    <p>{{ __('Todas as notícias') }}</p>--}}
+{{--                </a>--}}
+{{--            </li>--}}
+            <li @if ($pageSlug == 'profile') class="active " @endif>
+                <a href="{{ route('profile.edit')  }}">
+                    <i class="tim-icons icon-single-02"></i>
+                    <p>{{ __('messages.user_profile') }}</p>
+                </a>
+            </li>
             <li>
                 <a data-toggle="collapse" href="#laravel-examples" aria-expanded="true">
                     <i class="fab fa-laravel" ></i>
@@ -23,7 +35,7 @@
                         <li @if ($pageSlug == 'profile') class="active " @endif>
                             <a href="{{ route('profile.edit')  }}">
                                 <i class="tim-icons icon-single-02"></i>
-                                <p>{{ __('messages.user_profile') }}</p>
+                                <p>{{ __('usuários') }}</p>
                             </a>
                         </li>
 
