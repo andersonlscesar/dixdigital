@@ -35,5 +35,25 @@ return [
     'name'          => 'Nome',
     'email'         => 'E-mail',
     'password'      => 'Senha',
-    'confirmation'  => 'Confirmar senha'
+    'confirmation'  => 'Confirmar senha',
+    'save'          => 'Salvar',
+    'curr_pwd'      => 'Senha atual',
+    'new_pwd'       => 'Nova Senha',
+    'confirm_new_pwd' => 'Confirmar nova senha',
+    'change_pwd'    => 'Alterar senha',
+
+    // side bar
+
+    'user_profile' => 'Perfil do usuário',
+    'news' => 'Notícias',
+
+    // Navbar auth
+
+    'profile' => 'Perfil',
+    'logout' => 'Sair',
+
+
+    // Edit profile
+
+    'edit_profile' => 'Editar Perfil'
 ];

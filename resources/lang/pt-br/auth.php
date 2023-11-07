@@ -1,4 +1,5 @@
 <?php
 return [
-    'failed' => 'Credenciais inválidas'
+    'failed' => 'Credenciais inválidas',
+    'password'  => ''
 ];

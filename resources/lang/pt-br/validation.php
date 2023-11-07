@@ -14,6 +14,10 @@ return [
         ],
         'agree_terms_and_conditions' => [
             'required' => 'Por favor, aceite os termos e condições do site'
+        ],
+        'old_password' => [
+            'required' => 'Informe sua senha atual.',
+            'min' => 'A senha deve possuir no mínimo :min caracteres.'
         ]
     ]
 ];
