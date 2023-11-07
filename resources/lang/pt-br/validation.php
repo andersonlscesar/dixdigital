@@ -8,7 +8,12 @@ return [
             'required' => 'O campo "E-mail" é obrigatório'
         ],
         'password' => [
-            'required' => 'O campo "Senha" é obrigatório'
+            'required' => 'O campo "Senha" é obrigatório',
+            'confirmed' => 'As senhas estão diferentes.',
+            'min' => 'A senha deve possuir no mínimo :min caracteres.'
+        ],
+        'agree_terms_and_conditions' => [
+            'required' => 'Por favor, aceite os termos e condições do site'
         ]
     ]
 ];

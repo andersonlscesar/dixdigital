@@ -19,6 +19,17 @@ return [
         'public_desc'       => 'Há também um painel de administração CMS totalmente personalizável para este produto.'
     ],
 
+    'agreement' => 'Eu concordo com os ',
+    'terms_conditions' => 'termos e condições.',
+    'confirm_registration' => 'Confirmar',
+
+    // Página login
+
+    'forgot_password' => 'Esqueceu sua senha?',
+    'login' => 'Acesse agora',
+    'login_page' => 'Página de login',
+
+
     // Placeholders
 
     'name'          => 'Nome',
