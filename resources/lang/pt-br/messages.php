@@ -44,8 +44,9 @@ return [
 
     // side bar
 
-    'user_profile' => 'Perfil do usuário',
+    'user_profile' => 'Meu perfil',
     'news' => 'Notícias',
+    'public_news' => 'Publicar notícia',
 
     // Navbar auth
 
