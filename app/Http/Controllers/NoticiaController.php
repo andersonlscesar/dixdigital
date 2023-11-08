@@ -14,6 +14,7 @@ class NoticiaController extends Controller
      */
     public function index()
     {
+        $query = '';
         $news = Noticia::with('user')->where('user_id', auth()->user()->id )->get();
         return view('noticias.index', compact('news'));
     }

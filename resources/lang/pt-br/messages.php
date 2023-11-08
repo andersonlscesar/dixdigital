@@ -41,6 +41,7 @@ return [
     'new_pwd'       => 'Nova Senha',
     'confirm_new_pwd' => 'Confirmar nova senha',
     'change_pwd'    => 'Alterar senha',
+    'search'        => 'Pesquisar',
 
     // side bar
 
