@@ -14,7 +14,7 @@ class NoticiaController extends Controller
      */
     public function index()
     {
-        $news = Noticia::with('user')->get();
+        $news = Noticia::with('user')->where('user_id', auth()->user()->id )->get();
         return view('noticias.index', compact('news'));
     }
 
@@ -64,7 +64,14 @@ class NoticiaController extends Controller
      */
     public function update(StoreAndUpdateRequest $request, Noticia $noticia)
     {
-        dd($noticia);
+        try {
+            $data = $request->validated();
+            $noticia->update( $data );
+            return redirect()->route('noticias.edit', $noticia->id)->with('status', 'Notícia editada com sucesso.');
+        } catch (\Exception $error ) {
+            Log::error('Erro ao editar notícia. ' . $error->getMessage() );
+            return redirect()->route('noticias.edit', $noticia->id)->with('error', 'Erro ao editar notícia.');
+        }
     }
 
     /**
