@@ -17,7 +17,7 @@ class PreventAccessOthersNews
     public function handle(Request $request, Closure $next): Response
     {
         $noticia = $request->route('noticia');
-        if ($noticia->user_id !== Auth::user()->id ) abort(403, 'Acesso negado');
+        if (!is_null( $noticia ) && $noticia->user_id !== Auth::user()->id   ) abort(403, 'Acesso negado');
         return $next($request);
     }
 }
