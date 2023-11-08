@@ -14,7 +14,8 @@ class NoticiaController extends Controller
      */
     public function index()
     {
-        return view('noticias.index');
+        $news = Noticia::with('user')->get();
+        return view('noticias.index', compact('news'));
     }
 
     /**
@@ -40,38 +41,43 @@ class NoticiaController extends Controller
             return redirect()->route('noticias.create')->with('error', 'Erro ao publicar a notícia.');
         }
 
-
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Noticia $noticia)
     {
-        //
+        return view('noticias.show', compact('noticia'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Noticia $noticia)
     {
-        //
+        return view('noticias.edit', compact('noticia'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreAndUpdateRequest $request, Noticia $noticia)
     {
-        //
+        dd($noticia);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Noticia $noticia)
     {
-        //
+        try {
+            $noticia->delete();
+            return redirect()->route('noticias.index')->with('status', 'Notícia excluída com sucesso.');
+        } catch (\Exception $error ) {
+            Log::error('Erro ao excluir notícia ' . $error->getMessage());
+            return redirect()->route('noticias.show', $noticia->id)->with('error', 'Erro ao excluir notícia.');
+        }
     }
 }

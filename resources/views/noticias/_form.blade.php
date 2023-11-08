@@ -9,4 +9,4 @@
     <textarea class="form-control @error('content') is-invalid @enderror" name="content" id="content" placeholder="Conteúdo da notícia">{{ old('content') }}</textarea>
     @include('alerts.feedback', ['field' => 'content'])
 </div>
-<button type="submit" class="btn btn-primary">Publicar</button>
+<button type="submit" class="btn btn-primary">{{ request()->route()->getName() === 'noticias.edit' ? 'Editar' : 'Publicar' }}</button>
