@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreAndUpdateRequest;
+use App\Models\Noticia;
+use Illuminate\Support\Facades\Log;
 
 class NoticiaController extends Controller
 {
@@ -25,9 +28,19 @@ class NoticiaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreAndUpdateRequest $request)
     {
-        //
+        try {
+            $data = $request->validated();
+            $data['user_id'] = auth()->user()->id;
+            Noticia::create( $data );
+            return redirect()->route('noticias.create')->with('status', 'Notícia publicada com sucesso.');
+        } catch (\Throwable $error ) {
+            Log::error('Erro ao publicar a notícia ' . $error );
+            return redirect()->route('noticias.create')->with('error', 'Erro ao publicar a notícia.');
+        }
+
+
     }
 
     /**
