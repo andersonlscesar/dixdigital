@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Http\Requests\UserRequest;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Testing\Fluent\Concerns\Has;
@@ -56,7 +57,7 @@ class UserController extends Controller
         }
     }
 
-    public function password(UserRequest $request, User $user)
+    public function password(Request $request, User $user)
     {
         dd($request);
     }

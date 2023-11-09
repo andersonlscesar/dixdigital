@@ -34,7 +34,7 @@
         <div class="card-body">
 
             {{-- formulário para redefinição de senha--}}
-            <form action="{{ route('user.password') }}" method="POST">
+            <form action="{{ route('user.password', $user->id) }}" method="POST">
                 @csrf
                 @method("PUT")
                 <div class="form-group @error('password') has-danger @enderror">
