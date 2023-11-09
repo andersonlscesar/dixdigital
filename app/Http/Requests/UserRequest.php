@@ -25,7 +25,7 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name' => [
                 'required', 'min:3'
             ],
@@ -36,6 +36,17 @@ class UserRequest extends FormRequest
                 $this->route()->user ? 'required_with:password_confirmation' : 'required', 'nullable', 'confirmed', 'min:6'
             ],
         ];
+
+        if ( isset($this->request->all()['reset_password']) && $this->request->all()['reset_password']  === 'true')
+        {
+            $rules = [
+                'password' => [
+                    $this->route()->user ? 'required_with:password_confirmation' : 'required', 'confirmed', 'min:6'
+                ],
+            ];
+        }
+
+        return $rules;
     }
 
     public function messages(): array

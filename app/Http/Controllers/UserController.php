@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Http\Requests\UserRequest;
-
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Testing\Fluent\Concerns\Has;
+use Illuminate\Http\Request;
+
+
 
 class UserController extends Controller
 {
@@ -57,8 +58,16 @@ class UserController extends Controller
         }
     }
 
-    public function password(Request $request, User $user)
+    public function password(UserRequest $request, User $user)
     {
-        dd($request);
+        try {
+            $data = $request->validated();
+            $data['password'] = Hash::make($data['password']);
+            $user->update( $data );
+            return redirect()->route('user.edit', $user->id)->with('status', 'Senha redefinida com sucesso.');
+        } catch (\Exception $error ) {
+            Log::error('Erro ao redefinir senha. ' . $error->getMessage() );
+            return redirect()->route('user.edit', $user->id)->with('error', 'Erro ao redefinir a senha.');
+        }
     }
 }
