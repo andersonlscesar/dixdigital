@@ -38,4 +38,26 @@ class UserController extends Controller
             return redirect()->route('user.create')->with('error', 'Erro ao cadastrar novo usuário.');
         }
     }
+
+    public function edit(User $user)
+    {
+        return view('users.edit', compact('user'));
+    }
+
+    public function update(UserRequest $request, User $user)
+    {
+        try {
+            $data = $request->validated();
+            $user->update( $data );
+            return redirect()->route('user.edit', $user->id)->with('status', 'Cadastro atualizado com sucesso.');
+        } catch (\Throwable $error ) {
+            Log::error('Não foi possível atualizar este cadastro. ' . $error->getMessage() );
+            return redirect()->route('user.edit', $user->id)->with('error', 'Não foi possível atualizar este cadastro.');
+        }
+    }
+
+    public function password(UserRequest $request, User $user)
+    {
+        dd($request);
+    }
 }

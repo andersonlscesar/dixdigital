@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => __('Noticias'), 'pageSlug' => 'noticias'])
+@extends('layouts.app', ['page' => __('Noticias'), 'pageSlug' => 'noticias_create'])
 
 @section('content')
     <div class="card mb-3 p-2">

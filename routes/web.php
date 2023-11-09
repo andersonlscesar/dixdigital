@@ -41,6 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => ['access','auth']], function () {
 	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
+    Route::put('/user/{user}/password', [\App\Http\Controllers\UserController::class, 'password'])->name('user.password');
     Route::resource('noticias', NoticiaController::class )->middleware('access');
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
