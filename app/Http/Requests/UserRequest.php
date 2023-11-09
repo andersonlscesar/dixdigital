@@ -37,4 +37,12 @@ class UserRequest extends FormRequest
             ],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'email.email' => 'E-mail inválido',
+            'name.min' => 'O nome deve possuir no mínimo :min caracteres'
+        ];
+    }
 }

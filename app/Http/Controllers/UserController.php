@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Testing\Fluent\Concerns\Has;
 
 class UserController extends Controller
 {
@@ -17,5 +19,23 @@ class UserController extends Controller
     public function index(User $model)
     {
         return view('users.index', ['users' => $model->paginate(15)]);
+    }
+
+    public function create()
+    {
+        return view('users.create');
+    }
+
+    public function store(UserRequest $request)
+    {
+        try {
+            $data = $request->validated();
+            $data['password'] = Hash::make( $data['password'] );
+            User::create( $data );
+            return redirect()->route('user.create')->with('status', 'Usuário cadastrado com sucesso.');
+        } catch (\Exception $error ) {
+            Log::error('Erro ao cadastrar novo usuário. ' . $error->getMessage() );
+            return redirect()->route('user.create')->with('error', 'Erro ao cadastrar novo usuário.');
+        }
     }
 }

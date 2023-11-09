@@ -28,9 +28,9 @@
                 <div class="collapse show" id="laravel-examples">
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'profile') class="active " @endif>
-                            <a href="{{ route('profile.edit')  }}">
-                                <i class="tim-icons icon-single-02"></i>
-                                <p>{{ __('usuários') }}</p>
+                            <a href="{{ route('user.create')  }}">
+                                <i class="tim-icons icon-badge"></i>
+                                <p>{{ __('Cadastro de usuários') }}</p>
                             </a>
                         </li>
 
