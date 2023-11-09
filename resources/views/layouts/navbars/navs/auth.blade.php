@@ -57,7 +57,7 @@
             <div class="modal-header">
                 {{-- FORM DE PESQUISA --}}
                 <form method="GET" style="width: 100%">
-                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="{{ __('messages.search') }}">
+                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="{{ __('messages.search') }}" name="pesquisa" value="{{ request()->query('pesquisa') }}">
                     <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('Close') }}">
                         <i class="tim-icons icon-simple-remove"></i>
                     </button>
