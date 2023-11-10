@@ -32,6 +32,9 @@ class UserRequest extends FormRequest
             'email' => [
                 'required', 'email', Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null)
             ],
+            'nivel' => [
+                'required'
+            ],
             'password' => [
                 $this->route()->user ? 'required_with:password_confirmation' : 'required', 'nullable', 'confirmed', 'min:6'
             ],
@@ -53,7 +56,8 @@ class UserRequest extends FormRequest
     {
         return [
             'email.email' => 'E-mail inválido',
-            'name.min' => 'O nome deve possuir no mínimo :min caracteres'
+            'name.min' => 'O nome deve possuir no mínimo :min caracteres',
+            'nivel.required' => 'Informe o nível de acesso do usuário'
         ];
     }
 }

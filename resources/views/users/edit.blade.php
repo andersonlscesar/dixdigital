@@ -1,6 +1,7 @@
 @extends('layouts.app', ['page' => __('Users'), 'pageSlug' => 'users'])
 
 @section('content')
+    <a href="{{ route('user.index') }}"><button class="btn btn-secondary">Voltar</button></a>
     <div class="card mt-3 p-2">
         @include('alerts.success')
         <div class="card-header">
@@ -20,6 +21,20 @@
                     <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="E-mail" name="email" value="{{  $user->email }}">
                     @include('alerts.feedback', ['field' => 'email'])
                 </div>
+
+                <div class="form-group @error('nivel') has-danger @enderror">
+                    <select class="form-select form-control @error('nivel') is-invalid @enderror" aria-label="Seleção de nível de acesso" name="nivel">
+                        <option value="">Selecione um nível de acesso</option>
+                        {{-- Listando as permissões --}}
+                        @foreach($permissions as $permission)
+                            @foreach($user->permissions as $p)
+                                <option value="{{ $permission->id }}" {{ $permission->id === $p->id ? 'selected' : '' }}>{{ ucfirst($permission->name) }}</option>
+                            @endforeach
+                        @endforeach
+                    </select>
+                    @include('alerts.feedback', ['field' => 'nivel'])
+                </div>
+
                 <button type="submit" class="btn btn-primary">Salvar</button>
             </form>
         </div>
@@ -51,4 +66,6 @@
 
         </div>
     </div>
+
+
 @endsection

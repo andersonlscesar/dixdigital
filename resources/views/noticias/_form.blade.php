@@ -1,11 +1,9 @@
 <div class="form-group @error('title') has-danger @enderror">
-    <label for="title">Título da notícia</label>
     <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Título da notícia" name="title" value="{{ $noticia->title ?? old('title') }}">
     @include('alerts.feedback', ['field' => 'title'])
 </div>
 
 <div class="form-group @error('content') has-danger @enderror">
-    <label for="content">Conteúdo da notícia</label>
     <textarea rows="10" class="form-control @error('content') is-invalid @enderror" name="content" id="content" placeholder="Conteúdo da notícia">{{ $noticia->content ?? old('content') }}</textarea>
     @include('alerts.feedback', ['field' => 'content'])
 </div>

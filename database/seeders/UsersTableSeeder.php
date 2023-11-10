@@ -2,6 +2,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,7 +15,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        User::create([
             'id' => 1,
             'name' => 'Admin Admin',
             'email' => 'admin@white.com',
@@ -22,6 +23,6 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('secret'),
             'created_at' => now(),
             'updated_at' => now()
-        ]);
+        ])->givePermissionTo('administrador');
     }
 }
