@@ -3,6 +3,12 @@
     @include('alerts.feedback', ['field' => 'title'])
 </div>
 
+<div class="form-group">
+    <label for="image" class="btn btn-outline-info my-3" style="cursor: pointer;">Selecione uma imagem</label>
+    <input type="file" class="form-control-file" id="image" name="image" style="display: none">
+    @include('alerts.feedback', ['field' => 'title'])
+</div>
+
 <div class="form-group @error('content') has-danger @enderror">
     <textarea rows="10" class="form-control @error('content') is-invalid @enderror" name="content" id="content" placeholder="Conteúdo da notícia">{{ $noticia->content ?? old('content') }}</textarea>
     @include('alerts.feedback', ['field' => 'content'])

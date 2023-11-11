@@ -12,7 +12,7 @@ class Noticia extends Model
 
     protected $table = 'noticias';
     protected $primaryKey = 'id';
-    protected $fillable = ['title', 'content', 'user_id'];
+    protected $fillable = ['title', 'content', 'user_id', 'image'];
 
     public function user(): BelongsTo
     {

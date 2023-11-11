@@ -16,9 +16,12 @@
     </div>
 
 
-    <div class="card">
-        <div class="card-body">
-            {{ ucfirst($noticia->content) }}
+    <div class="card" >
+        <div class="card-body" >
+            @if (!is_null($noticia->image))
+                <img class="rounded img-fluid float-left mb-4 mr-4" src="{{ url("storage/{$noticia->image}") }}" alt="{{ $noticia->titulo }}">
+            @endif
+            <div>{{ ucfirst($noticia->content) }}</div>
         </div>
     </div>
 
