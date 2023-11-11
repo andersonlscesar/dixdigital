@@ -37,5 +37,10 @@ Nessa página os usuários podem se registrar no sistema e são automaticamente 
 
 * Formulário de registro
   * Todos os campos estão devidamente validados :white_check_mark:
-  * Validação contra e-mails inválidos;
-  * 
+  * Validação contra e-mails inválidos :white_check_mark:
+  * Validação contra e-mails já em uso :white_check_mark:
+  * Senha de no mínimo 8 caracteres :white_check_mark:
+  * Verificação de confirmação de senha :white_check_mark:
+
+
+![Página de registro](./demo/registro.gif)
