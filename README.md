@@ -70,5 +70,18 @@ Implementei a inserção de foto de perfil.
 * Imagens são validadas
 * Apenas imagens de até 2MB são permitidas
 
+![perfil](./demo/perfil_foto.gif)
 
+---
+
+# CRUD Notícias
+
+O CRUD de notícias foi definido, os usuários só podem ver as próprias notícias. Existem também um middleware que previne esse acesso, caso algum usuário digite na URL o id de uma notícia que não tenha sido postada por ele mesmo.
+
+
+## Publicando notícia
+
+A escolha de uma imagem para a notícia é opcional. 
+
+![publicando notícia](./demo/noticia_pub.gif)
 
