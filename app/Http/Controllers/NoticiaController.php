@@ -75,11 +75,16 @@ class NoticiaController extends Controller
     public function update(StoreAndUpdateRequest $request, Noticia $noticia)
     {
         try {
-            $data = $request->validated();
-            $noticia->update( $data );
+            $data = $request->all();
+            if ($request->hasFile('image')) {
+                $this->deleteImage( $noticia->image );
+                $data['image'] = $request->image->store('noticias');
+            }
+            $noticia->update($data);
+
             return redirect()->route('noticias.edit', $noticia->id)->with('status', 'Notícia editada com sucesso.');
-        } catch (\Exception $error ) {
-            Log::error('Erro ao editar notícia. ' . $error->getMessage() );
+        } catch (\Exception $error) {
+            Log::error('Erro ao editar notícia. ' . $error->getMessage());
             return redirect()->route('noticias.edit', $noticia->id)->with('error', 'Erro ao editar notícia.');
         }
     }

@@ -23,7 +23,17 @@ class StoreAndUpdateRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:100'],
-            'content' => ['required', 'string']
+            'content' => ['required', 'string'],
+            'image' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048']
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'image.image'   => 'Apenas imagens são permitidas',
+            'image.mime'    => 'Formato de arquivo inválido',
+            'image.max'     => 'Tamanho máximo para enviar a imagem :max kilobytes.'
         ];
     }
 }

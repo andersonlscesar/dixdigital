@@ -9,7 +9,7 @@
             <h5 class="title">Editar notícia</h5>
         </div>
         <div class="card-body">
-            <form action="{{ route('noticias.update', $noticia->id) }}" method="POST" >
+            <form action="{{ route('noticias.update', $noticia->id) }}" method="POST"  enctype="multipart/form-data">
                 @csrf
                 @method("PUT")
                 @include('noticias._form')
