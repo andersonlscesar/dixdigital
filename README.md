@@ -44,3 +44,31 @@ Nessa página os usuários podem se registrar no sistema e são automaticamente 
 
 
 ![Página de registro](./demo/registro.gif)
+
+### Página de login 
+
+* Formulário de login 
+  * Preenchimento obrigatório de todos os campos :white_check_mark:
+  * Checagem das credenciais :white_check_mark:
+
+![Página de login](./demo/login.gif)
+
+
+### Gerenciamento de usuários 
+
+Forneci ao usuário padrão "admin@white.com" acesso administrativo para ser possível gerenciar e conceder acesso administrativo a outros usuários.
+
+Aqui está um exemplo:
+* Editando, excluindo, criando perfis :white_check_mark:
+
+![Painel](./demo/gerenciamento_users.gif)
+
+### Foto de perfil 
+
+Implementei a inserção de foto de perfil. 
+
+* Imagens são validadas
+* Apenas imagens de até 2MB são permitidas
+
+
+
