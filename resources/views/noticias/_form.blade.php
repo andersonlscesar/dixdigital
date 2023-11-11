@@ -9,6 +9,8 @@
     @include('alerts.feedback', ['field' => 'image'])
 </div>
 
+<img src="{{ isset($noticia) ? url("storage/{$noticia->image}") : ""  }}" alt="preview" id="previewImage" class="img-thumbnail" style="max-width: 600px; object-fit: contain;">
+
 <div class="form-group @error('content') has-danger @enderror">
     <textarea rows="10" class="form-control @error('content') is-invalid @enderror" name="content" id="content" placeholder="Conteúdo da notícia">{{ $noticia->content ?? old('content') }}</textarea>
     @include('alerts.feedback', ['field' => 'content'])
