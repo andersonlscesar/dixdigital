@@ -14,6 +14,9 @@
         </div>
 
         <div class="card-footer">
+            @if ($new->user->profile_image)
+                <img style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; " src="{{ url('storage/' . $new->user->profile_image) }}" alt="{{ $new->user->name }}">
+            @endif
             <small>Autor: {{ ucwords( $new->user->name )  }}</small>
         </div>
 

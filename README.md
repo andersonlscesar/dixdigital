@@ -85,3 +85,10 @@ A escolha de uma imagem para a notícia é opcional.
 
 ![publicando notícia](./demo/noticia_pub.gif)
 
+## Prevenindo que o usuário acesse outra notícia
+
+![acesso negado](./demo/acesso.gif)
+
+
+
+

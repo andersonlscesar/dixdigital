@@ -7,11 +7,18 @@
         @include('alerts.success')
 
         <div class="card-header">
-            <h4 class="title">{{ ucfirst( $noticia->title ) }}</h4>
-            <small>{{ dateToString( $noticia->created_at ) }}</small>
-            <small>{{ countTimeForHumans( $noticia->created_at ) }}</small>
-            <br>
-            <small>Autor: {{ $noticia->user->name }}</small>
+            <div class="d-flex gap-2">
+                @if ($noticia->user->profile_image)
+                    <img style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; " src="{{ url('storage/' . $noticia->user->profile_image) }}" alt="{{ $noticia->user->name }}">
+                @endif
+                <div class="d-flex flex-column ml-3">
+                    <h4 class="title">{{ ucfirst( $noticia->title ) }}</h4>
+                    <small>{{ dateToString( $noticia->created_at ) }}</small>
+                    <small>{{ countTimeForHumans( $noticia->created_at ) }}</small>
+                    <small>Autor: {{ $noticia->user->name }}</small>
+                </div>
+            </div>
+
         </div>
     </div>
 
