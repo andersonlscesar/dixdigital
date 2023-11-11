@@ -32,7 +32,7 @@ class StoreAndUpdateRequest extends FormRequest
     {
         return [
             'image.image'   => 'Apenas imagens são permitidas',
-            'image.mime'    => 'Formato de arquivo inválido',
+            'image.mimes'    => 'Formato de arquivo inválido',
             'image.max'     => 'Tamanho máximo para enviar a imagem :max kilobytes.'
         ];
     }

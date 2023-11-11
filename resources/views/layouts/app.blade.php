@@ -104,11 +104,11 @@
             const imgInput = document.getElementById('image');
             if (imgInput !== null) {
                 const previewImage = document.getElementById('previewImage');
-                console.log(previewImage.getAttribute("src"));
                 if (previewImage.getAttribute("src") === "") {
                     previewImage.style.display = 'none';
                 }
-                previewImage.style.marginBottom = '2rem';
+
+
                 imgInput.addEventListener('change', function (event) {
                     const fileInput = event.target;
 
@@ -116,7 +116,12 @@
                         const reader = new FileReader();
 
                         reader.onload = function (e) {
-                            previewImage.style.display = 'block';
+                            @if (request()->route()->getName() == 'noticias.create')
+                                previewImage.style.display = 'block';
+                            @else
+                                previewImage.style.display = 'relative';
+                            @endif
+
                             previewImage.src = e.target.result;
                         };
 

@@ -15,16 +15,27 @@
                             @include('alerts.success')
 
                             <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                <label>{{ __('messages.name') }}</label>
                                 <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('messages.name') }}" value="{{ old('name', auth()->user()->name) }}">
                                 @include('alerts.feedback', ['field' => 'name'])
                             </div>
 
                             <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
-                                <label>{{ __('messages.email') }}</label>
                                 <input type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('messages.email') }}" value="{{ old('email', auth()->user()->email) }}">
                                 @include('alerts.feedback', ['field' => 'email'])
                             </div>
+
+                            {{-- Cargo / Função--}}
+
+                            <div class="form-group">
+                                <input type="text" name="role" class="form-control" placeholder="{{ __('Cargo / Função (Opcional)') }}" value="{{ old('role', auth()->user()->role ?? "") }}">
+                            </div>
+
+                            {{-- Descrição--}}
+
+                            <div class="form-group">
+                                <textarea class="form-control" placeholder="{{ __('Autodescrição (Opcional)') }}" name="description">{{ auth()->user()->description ?? "" }}</textarea>
+                            </div>
+
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-fill btn-primary">{{ __('messages.save') }}</button>
@@ -44,19 +55,16 @@
                         @include('alerts.success', ['key' => 'password_status'])
 
                         <div class="form-group{{ $errors->has('old_password') ? ' has-danger' : '' }}">
-                            <label>{{ __('messages.curr_pwd') }}</label>
                             <input type="password" name="old_password" class="form-control{{ $errors->has('old_password') ? ' is-invalid' : '' }}" placeholder="{{ __('messages.curr_pwd') }}" value="" >
                             @include('alerts.feedback', ['field' => 'old_password'])
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
-                            <label>{{ __('messages.new_pwd') }}</label>
                             <input type="password" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ __('messages.new_pwd') }}" value="" >
                             @include('alerts.feedback', ['field' => 'password'])
                         </div>
 
                         <div class="form-group">
-                            <label>{{ __('messages.confirm_new_pwd') }}</label>
                             <input type="password" name="password_confirmation" class="form-control" placeholder="{{ __('messages.confirm_new_pwd') }}" value="" >
                         </div>
 
@@ -76,31 +84,27 @@
                             <div class="block block-two"></div>
                             <div class="block block-three"></div>
                             <div class="block block-four"></div>
-                            <a href="#">
-                                <img class="avatar" src="{{ asset('white') }}/img/emilyz.jpg" alt="">
-                                <h5 class="title">{{ auth()->user()->name }}</h5>
-                            </a>
+                            <form action="{{ route('profile.image') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method("PUT")
+                                <label for="image" style="cursor: pointer;" title="Clique aqui para alterar a foto de perfil">
+                                    <img class="avatar" id="previewImage" src="{{ auth()->user()->profile_image ? url("storage/" . auth()->user()->profile_image) :  asset('img/profile.png') }}" alt="profile" style="object-fit: cover;">
+                                    <h5 class="title">{{ ucwords(auth()->user()->name) }}</h5>
+                                </label>
+                                <input type="file" id="image" name="image" style="display: none">
+                                <br>
+                                <button class="btn btn-primary mb-3">Salvar</button>
+                            </form>
                             <p class="description">
-                                {{ _('Ceo/Co-Founder') }}
+                                {{ auth()->user()->role ?? "" }}
                             </p>
                         </div>
-                    </p>
-                    <div class="card-description">
-                        {{ _('Do not be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...') }}
+
+                    <div class="card-description text-center">
+                        {{ auth()->user()->description ?? "" }}
                     </div>
                 </div>
-                <div class="card-footer">
-                    <div class="button-container">
-                        <button class="btn btn-icon btn-round btn-facebook">
-                            <i class="fab fa-facebook"></i>
-                        </button>
-                        <button class="btn btn-icon btn-round btn-twitter">
-                            <i class="fab fa-twitter"></i>
-                        </button>
-                        <button class="btn btn-icon btn-round btn-google">
-                            <i class="fab fa-google-plus"></i>
-                        </button>
-                    </div>
+
                 </div>
             </div>
         </div>

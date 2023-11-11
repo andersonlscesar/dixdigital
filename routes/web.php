@@ -44,8 +44,9 @@ Route::group(['middleware' => ['access','auth']], function () {
     Route::put('/user/{user}/password', [\App\Http\Controllers\UserController::class, 'password'])->name('user.password');
     Route::get('/user/{user}/confirmation', [\App\Http\Controllers\UserController::class, 'confirmation'])->name('user.confirmation')->middleware(['prevent_self_deletion']);
     Route::resource('noticias', NoticiaController::class )->middleware('access');
-	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
-	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
-	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
+    Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
+    Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
+    Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
+    Route::put('profile-image', ['as' => 'profile.image', 'uses' => 'App\Http\Controllers\ProfileController@setImage']);
 });
 
