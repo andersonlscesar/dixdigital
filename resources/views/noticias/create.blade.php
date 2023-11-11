@@ -11,7 +11,7 @@
             <h5 class="title">Publicar notícia</h5>
         </div>
         <div class="card-body">
-            <form action="{{ route('noticias.store') }}" method="POST" >
+            <form action="{{ route('noticias.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method("POST")
                 @include('noticias._form')

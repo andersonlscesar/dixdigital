@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -27,10 +30,39 @@ class ProfileController extends Controller
     public function update(ProfileRequest $request)
     {
         auth()->user()->update($request->all());
-
         return back()->withStatus(__('Perfil atualizado com sucesso.'));
     }
 
+    public function setImage(Request $request)
+    {
+        try {
+            $request->validate([
+                'image' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048']
+            ], [
+                'image.image' => 'Apenas imagens são permitidas',
+                'image.mimes' => 'Formato de arquivo inválido',
+                'image.max'   => 'Tamanho máximo para enviar a imagem :max kilobytes.'
+            ]);
+
+            if ($request->hasFile('image')) {
+
+                if (!is_null(auth()->user()->profile_image) && Storage::disk('public')->exists( auth()->user()->profile_image ) ) {
+                    Storage::disk('public')->delete( auth()->user()->profile_image );
+                }
+
+                $path = $request->image->store('profile');
+                $user = auth()->user();
+                $user->profile_image = $path;
+                $user->save();
+                return redirect()->route('profile.edit')->with('status', 'Foto de perfil definida com sucesso.');
+            }
+
+            return redirect()->route('profile.edit')->with('error', 'Erro ao definir foto de perfil.');
+        } catch (\Exception $error) {
+            Log::error('Erro ao definir foto de perfil ' . $error->getMessage());
+            return redirect()->route('profile.edit')->with('error', 'Erro ao definir foto de perfil.');
+        }
+    }
     /**
      * Change the password
      *

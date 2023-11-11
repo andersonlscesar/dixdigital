@@ -17,8 +17,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto">
-
-                @if (request()->route()->getName() == 'noticias.index')
+                {{-- Renderização condicional levando em conta a rota atual --}}
+                @if (request()->route()->getName() == 'noticias.index' || request()->route()->getName() == 'user.index')
                     <li class="search-bar input-group">
                         <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal"><i class="tim-icons icon-zoom-split"></i>
                             <span class="d-lg-none d-md-block">{{ __('messages.search') }}</span>
@@ -30,7 +30,7 @@
                 <li class="dropdown nav-item">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <div class="photo">
-                            <img src="{{ asset('white') }}/img/anime3.png" alt="{{ __('Profile Photo') }}">
+                            <img src="{{ auth()->user()->profile_image ? url('storage/'. auth()->user()->profile_image) : asset('white//img/anime3.png') }}" alt="{{ __('Profile Photo') }}">
                         </div>
                         <b class="caret d-none d-lg-block d-xl-block"></b>
                         <p class="d-lg-none">{{ __('Log out') }}</p>

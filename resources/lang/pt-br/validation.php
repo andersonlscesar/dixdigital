@@ -33,6 +33,9 @@ return [
 
         'content' => [
             'required' => 'Informe o conteúdo da notícia'
+        ],
+        'image' => [
+            'uploaded' => 'Arquivo não carregado. Escolha outra imagem.'
         ]
 
     ]

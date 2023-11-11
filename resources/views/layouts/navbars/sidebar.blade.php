@@ -27,18 +27,21 @@
 
                 <div class="collapse show" id="laravel-examples">
                     <ul class="nav pl-4">
-                        <li @if ($pageSlug == 'users') class="active " @endif>
-                            <a href="{{ route('user.index')  }}">
-                                <i class="tim-icons icon-bullet-list-67"></i>
-                                <p>{{ __('Lista de usuários') }}</p>
-                            </a>
-                        </li>
-                        <li @if ($pageSlug == 'user_create') class="active " @endif>
-                            <a href="{{ route('user.create')  }}">
-                                <i class="tim-icons icon-badge"></i>
-                                <p>{{ __('Cadastro de usuários') }}</p>
-                            </a>
-                        </li>
+
+                        @can('administrador')
+                            <li @if ($pageSlug == 'users') class="active " @endif>
+                                <a href="{{ route('user.index')  }}">
+                                    <i class="tim-icons icon-bullet-list-67"></i>
+                                    <p>{{ __('Lista de usuários') }}</p>
+                                </a>
+                            </li>
+                            <li @if ($pageSlug == 'user_create') class="active " @endif>
+                                <a href="{{ route('user.create')  }}">
+                                    <i class="tim-icons icon-badge"></i>
+                                    <p>{{ __('Cadastro de usuários') }}</p>
+                                </a>
+                            </li>
+                        @endcan
 
                         <li @if ($pageSlug == 'noticias') class="active " @endif>
                             <a href="{{ route('noticias.index')  }}">

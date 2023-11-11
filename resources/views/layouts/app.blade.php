@@ -101,14 +101,43 @@
         <script src="{{ asset('white') }}/js/theme.js"></script>
 
         <script>
+            const imgInput = document.getElementById('image');
+            if (imgInput !== null) {
+                const previewImage = document.getElementById('previewImage');
+                if (previewImage.getAttribute("src") === "") {
+                    previewImage.style.display = 'none';
+                }
+
+
+                imgInput.addEventListener('change', function (event) {
+                    const fileInput = event.target;
+
+                    if (fileInput.files && fileInput.files[0]) {
+                        const reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            @if (request()->route()->getName() == 'noticias.create')
+                                previewImage.style.display = 'block';
+                            @else
+                                previewImage.style.display = 'relative';
+                            @endif
+
+                            previewImage.src = e.target.result;
+                        };
+
+                        reader.readAsDataURL(fileInput.files[0]);
+                    }
+                });
+            }
             const myModal = document.getElementById('confirm_modal')
-            const myInput = document.getElementById('myInput')
 
-            console.log(myInput);
+            if (myModal !== null ) {
+                const myInput = document.getElementById('myInput')
+                myModal.addEventListener('shown.bs.modal', () => {
+                    console.log(true)
+                })
+            }
 
-            myModal.addEventListener('shown.bs.modal', () => {
-                console.log(true)
-            })
         </script>
 
         @stack('js')

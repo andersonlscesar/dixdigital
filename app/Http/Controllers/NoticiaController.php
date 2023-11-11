@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreAndUpdateRequest;
 use App\Models\Noticia;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class NoticiaController extends Controller
 {
@@ -36,8 +37,13 @@ class NoticiaController extends Controller
     public function store(StoreAndUpdateRequest $request)
     {
         try {
-            $data = $request->validated();
+            $data = $request->all();
             $data['user_id'] = auth()->user()->id;
+
+            if ( $request->hasFile( 'image' ) && $request->file( 'image' )->isValid() ) {
+                $data['image'] = $request->image->store('noticias');
+            }
+
             Noticia::create( $data );
             return redirect()->route('noticias.create')->with('status', 'Notícia publicada com sucesso.');
         } catch (\Throwable $error ) {
@@ -69,11 +75,16 @@ class NoticiaController extends Controller
     public function update(StoreAndUpdateRequest $request, Noticia $noticia)
     {
         try {
-            $data = $request->validated();
-            $noticia->update( $data );
+            $data = $request->all();
+            if ($request->hasFile('image')) {
+                $this->deleteImage( $noticia->image );
+                $data['image'] = $request->image->store('noticias');
+            }
+            $noticia->update($data);
+
             return redirect()->route('noticias.edit', $noticia->id)->with('status', 'Notícia editada com sucesso.');
-        } catch (\Exception $error ) {
-            Log::error('Erro ao editar notícia. ' . $error->getMessage() );
+        } catch (\Exception $error) {
+            Log::error('Erro ao editar notícia. ' . $error->getMessage());
             return redirect()->route('noticias.edit', $noticia->id)->with('error', 'Erro ao editar notícia.');
         }
     }
@@ -84,11 +95,22 @@ class NoticiaController extends Controller
     public function destroy(Noticia $noticia)
     {
         try {
+            if ( !is_null( $noticia->image ) ) {
+                $this->deleteImage( $noticia->image );
+            }
             $noticia->delete();
             return redirect()->route('noticias.index')->with('status', 'Notícia excluída com sucesso.');
         } catch (\Exception $error ) {
             Log::error('Erro ao excluir notícia ' . $error->getMessage());
             return redirect()->route('noticias.show', $noticia->id)->with('error', 'Erro ao excluir notícia.');
+        }
+    }
+
+
+    private function deleteImage( $filename )
+    {
+        if (Storage::disk('public')->exists($filename)) {
+            Storage::disk('public')->delete($filename);
         }
     }
 }

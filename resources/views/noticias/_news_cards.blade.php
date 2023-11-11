@@ -10,7 +10,7 @@
         </div>
 
         <div class="card-body">
-            {{ mb_strcut(ucfirst( $new->content ), 0, rand(300, 500 ) )  }} ...
+            {{ mb_strcut( ucfirst( $new->content ), 0, rand(300, 500 ) )  }} ...
         </div>
 
         <div class="card-footer">
